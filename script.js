@@ -71,7 +71,45 @@ function renderFavorites() {
     favoritesList.appendChild(li);
   });
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("theme-checkbox");
+  const label = document.getElementById("theme-label");
 
+  // Проверяем сохранённую тему в localStorage
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme");
+    toggle.checked = true;
+    label.textContent = "Switch to Light";
+  } else {
+    label.textContent = "Switch to Dark";
+  }
+
+  // Переключение темы
+  toggle.addEventListener("change", () => {
+    document.body.classList.toggle("dark-theme", toggle.checked);
+
+    // Обновляем надпись
+    label.textContent = toggle.checked ? "Switch to Light" : "Switch to Dark";
+
+    // Сохраняем выбор в localStorage
+    localStorage.setItem("theme", toggle.checked ? "dark" : "light");
+  });
+});
+// Ждём, пока DOM полностью загрузится
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("theme-checkbox");
+  const label = document.getElementById("theme-label");
+
+  // Устанавливаем правильный текст при загрузке
+  label.textContent = toggle.checked ? "Switch to Light" : "Switch to Dark";
+
+  // Слушаем изменения ползунка
+  toggle.addEventListener("change", () => {
+    document.body.classList.toggle("dark-theme", toggle.checked);
+    label.textContent = toggle.checked ? "Switch to Light" : "Switch to Dark";
+  });
+});
 renderFavorites();
 
 getRandomQuote();

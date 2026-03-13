@@ -142,11 +142,6 @@ button {
   }
 }
 
-#quoteAuthor {
-  color: #000; /* чёрный текст */
-  font-weight: bold;
-  font-size: 1rem; /* увеличиваем размер */
-}
 /* --- Адаптивность для планшета --- */
 @media (max-width: 992px) {
   .card {
@@ -173,4 +168,179 @@ button {
   #favoritesList {
     width: 100%;
   }
+}
+
+/* --- Переключатель темы --- */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: sans-serif;
+  margin: 10px 0;
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000000;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: rgb(255, 251, 251);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #c4a9a9;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* --- Тёмная тема для всех элементов --- */
+body.dark-theme {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark-theme .card {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme #quoteText,
+body.dark-theme #quoteAuthor {
+  color: #f5f5f5;
+}
+
+body.dark-theme #newQuoteBtn {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+body.dark-theme #newQuoteBtn:hover {
+  background-color: #0a58ca;
+}
+
+body.dark-theme #favoriteBtn {
+  border-color: #dc3545;
+  color: #dc3545;
+  background-color: transparent;
+}
+
+body.dark-theme #favoriteBtn:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+body.dark-theme #favoritesList .list-group-item {
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  border-color: #444;
+}
+
+body.dark-theme #favoritesList .list-group-item:hover {
+  background-color: #3a3a3a;
+}
+body.dark-theme,
+body.dark-theme h1,
+body.dark-theme h3,
+body.dark-theme p,
+body.dark-theme em,
+body.dark-theme blockquote,
+body.dark-theme button {
+  color: #f5f5f5 !important; /* светлый текст для всего */
+}
+body.dark-theme {
+  background-color: #121212 !important; /* фон страницы */
+}
+
+body.dark-theme .card {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme #favoritesList .list-group-item {
+  background-color: #2a2a2a !important;
+  color: #f5f5f5 !important;
+  border-color: #444 !important;
+}
+
+body.dark-theme #favoritesList .list-group-item:hover {
+  background-color: #3a3a3a !important;
+}
+
+body.dark-theme #newQuoteBtn,
+body.dark-theme #favoriteBtn {
+  color: #fff !important;
+}
+
+body.dark-theme #newQuoteBtn:hover {
+  background-color: #0a58ca !important;
+}
+
+body.dark-theme #favoriteBtn:hover {
+  background-color: #dc3545 !important;
+  color: #fff !important;
+}
+
+/* --- ВСЕ тексты на странице --- */
+body.dark-theme,
+body.dark-theme h1,
+body.dark-theme h3,
+body.dark-theme em,
+body.dark-theme p,
+body.dark-theme blockquote,
+body.dark-theme button {
+  color: #f5f5f5 !important;
+}
+body,
+body .card,
+body h1,
+body h3,
+body p,
+body em,
+body blockquote,
+body button,
+body #favoritesList .list-group-item {
+  transition:
+    background-color 0.5s ease,
+    color 1s ease;
 }
