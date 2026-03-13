@@ -65,7 +65,7 @@ function updateQuote(quote) {
 }
 
 // --- Начальная цитата ---
-updateQuote(currentQuote);
+// updateQuote(currentQuote);
 
 // --- Кнопка New Quote ---
 newQuoteBtn.addEventListener("click", () => {
