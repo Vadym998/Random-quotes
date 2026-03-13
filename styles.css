@@ -142,6 +142,11 @@ button {
   }
 }
 
+#quoteAuthor {
+  color: #000; /* чёрный текст */
+  font-weight: bold;
+  font-size: 1rem; /* увеличиваем размер */
+}
 /* --- Адаптивность для планшета --- */
 @media (max-width: 992px) {
   .card {

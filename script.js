@@ -1,93 +1,54 @@
-/* script.js */
+async function fetchQuote() {
+  const res = await fetch("https://api.quotable.io/random");
+  const data = await res.json();
 
-// --- Массив цитат (можно расширять) ---
-const quotes = [
-  {
-    text: "Life is what happens when you're busy making other plans.",
-    author: "John Lennon",
-  },
-  { text: "Stay hungry, stay foolish.", author: "Steve Jobs" },
-  {
-    text: "The only limit to our realization of tomorrow is our doubts of today.",
-    author: "Franklin D. Roosevelt",
-  },
-  { text: "The purpose of our lives is to be happy.", author: "Dalai Lama" },
-  {
-    text: "In the middle of every difficulty lies opportunity.",
-    author: "Albert Einstein",
-  },
-  {
-    text: "Success usually comes to those who are too busy to be looking for it.",
-    author: "Henry David Thoreau",
-  },
-  {
-    text: "Don’t watch the clock; do what it does. Keep going.",
-    author: "Sam Levenson",
-  },
-  {
-    text: "You miss 100% of the shots you don’t take.",
-    author: "Wayne Gretzky",
-  },
-  {
-    text: "Whether you think you can or you think you can’t, you’re right.",
-    author: "Henry Ford",
-  },
-  {
-    text: "Everything you’ve ever wanted is on the other side of fear.",
-    author: "George Addair",
-  },
-];
+  quoteText.textContent = data.content;
+  quoteAuthor.textContent = data.author;
+}
 
-// --- DOM элементы ---
+// DOM ell
 const quoteText = document.getElementById("quoteText");
 const quoteAuthor = document.getElementById("quoteAuthor");
 const newQuoteBtn = document.getElementById("newQuoteBtn");
 const favoriteBtn = document.getElementById("favoriteBtn");
 const favoritesList = document.getElementById("favoritesList");
 
-// --- Избранные цитаты ---
+let currentQuote = { text: "", author: "" };
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-// --- Текущая цитата ---
-let currentQuote = getRandomQuote();
-
-// --- Случайная цитата ---
-function getRandomQuote() {
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  return quotes[randomIndex];
-}
-
-// --- Обновление карточки ---
+// Card update
 function updateQuote(quote) {
   quoteText.textContent = `"${quote.text}"`;
-  quoteAuthor.textContent = `${quote.author}`;
-  currentQuote = quote; // сохраняем текущую цитату
+  // console.log("Updating author:", quote.author);
+  const span = document.getElementById("quoteAuthor");
+  span.textContent = `${quote.author}`;
+  currentQuote = quote;
 }
 
-// --- Начальная цитата ---
-// updateQuote(currentQuote);
+async function getRandomQuote() {
+  try {
+    const response = await fetch("https://api.quotable.io/random");
+    const data = await response.json();
 
-// --- Кнопка New Quote ---
-newQuoteBtn.addEventListener("click", () => {
-  const quote = getRandomQuote();
-  updateQuote(quote);
-});
+    const quote = { text: data.content, author: data.author };
+    updateQuote(quote); // update the card here!
+  } catch (error) {
+    console.error("Fetch error:", error);
+    quoteText.textContent = "Failed to load citation 😢";
+    quoteAuthor.textContent = "";
+  }
+}
 
-// --- Добавление в избранное ---
+newQuoteBtn.addEventListener("click", getRandomQuote);
+
 favoriteBtn.addEventListener("click", () => {
-  // Проверка на дубликаты
-  const exists = favorites.some(
-    (fav) =>
-      fav.text === currentQuote.text && fav.author === currentQuote.author,
-  );
-  if (!exists) {
-    favorites.push(currentQuote); // добавляем любую цитату, пока она не повторяется
+  if (!favorites.some((fav) => fav.text === currentQuote.text)) {
+    favorites.push(currentQuote);
     localStorage.setItem("favorites", JSON.stringify(favorites));
-    renderFavorites(); // обновляем список
+    renderFavorites();
   }
 });
 
-// --- Отрисовка избранного ---
 function renderFavorites() {
   favoritesList.innerHTML = "";
   favorites.forEach((fav, index) => {
@@ -96,7 +57,7 @@ function renderFavorites() {
       "list-group-item d-flex justify-content-between align-items-center";
     li.textContent = `"${fav.text}" — ${fav.author}`;
 
-    // Кнопка удалить
+    // Delete button
     const delBtn = document.createElement("button");
     delBtn.textContent = "❌";
     delBtn.className = "btn btn-sm btn-outline-danger ms-2";
@@ -112,3 +73,5 @@ function renderFavorites() {
 }
 
 renderFavorites();
+
+getRandomQuote();
