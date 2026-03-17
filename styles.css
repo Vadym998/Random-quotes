@@ -1,4 +1,4 @@
-/* --- Фон страницы --- */
+/* --- Page background --- */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f1f3f5;
@@ -8,7 +8,7 @@ body {
   min-height: 100vh;
 }
 
-/* --- Контейнер --- */
+/* --- Container --- */
 .container {
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@ body {
   padding: 2rem;
 }
 
-/* --- Карточка цитаты --- */
+/* --- Quote card --- */
 .card {
   border-radius: 25px;
   background: #ffffff;
@@ -72,7 +72,7 @@ blockquote {
   margin-top: 0.5rem;
 }
 
-/* --- Кнопки --- */
+/* --- Buttons --- */
 button {
   font-weight: 600;
   transition: all 0.2s;
@@ -103,7 +103,7 @@ button {
   border-radius: 20px;
 }
 
-/* --- Список избранного --- */
+/* --- Favorites list --- */
 #favoritesList {
   max-width: 600px;
   width: 100%;
@@ -142,7 +142,7 @@ button {
   }
 }
 
-/* --- Адаптивность для планшета --- */
+/* --- Tablet responsiveness--- */
 @media (max-width: 992px) {
   .card {
     height: 260px;
@@ -156,7 +156,7 @@ button {
   }
 }
 
-/* --- Адаптивность для телефона --- */
+/* --- Adaptability for phone --- */
 @media (max-width: 576px) {
   .card {
     height: 240px;
@@ -170,7 +170,7 @@ button {
   }
 }
 
-/* --- Переключатель темы --- */
+/* --- Theme switch --- */
 .theme-switch-wrapper {
   display: flex;
   align-items: center;
@@ -232,7 +232,7 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-/* --- Тёмная тема для всех элементов --- */
+/* --- Dark theme for all elements --- */
 body.dark-theme {
   background-color: #121212;
   color: #f5f5f5;
@@ -285,10 +285,10 @@ body.dark-theme p,
 body.dark-theme em,
 body.dark-theme blockquote,
 body.dark-theme button {
-  color: #f5f5f5 !important; /* светлый текст для всего */
+  color: #f5f5f5 !important; /* light text for everything */
 }
 body.dark-theme {
-  background-color: #121212 !important; /* фон страницы */
+  background-color: #121212 !important; /* page background */
 }
 
 body.dark-theme .card {
@@ -321,7 +321,7 @@ body.dark-theme #favoriteBtn:hover {
   color: #fff !important;
 }
 
-/* --- ВСЕ тексты на странице --- */
+/* --- ALL texts on the page --- */
 body.dark-theme,
 body.dark-theme h1,
 body.dark-theme h3,

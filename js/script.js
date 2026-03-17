@@ -24,7 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadQuote() {
     try {
+      console.log("Loading quote...");
       const quote = await getrandomQuote();
+      console.log("Quote loaded:", quote);
       updateQuote(quote); // update the card here!
     } catch (error) {
       console.error("Fetch error:", error);
